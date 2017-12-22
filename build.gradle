@@ -1,0 +1,24 @@
+apply plugin: "java"
+apply plugin: "application"
+
+mainClassName = "ru.ocrimea.Solution"
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+jar {
+  manifest.attributes("Main-Class": mainClassName);
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+ }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.4"
+}
+
