@@ -1,19 +1,13 @@
 package ru.ocrimea;
 
-enum  CarColor {
-    RED, BLACK, WHITE,BLUE, GREEN, UNDEFINED
-}
-enum CarFirm {
-    AUDI, BMW, Mercedes, VW, UNDEFINED
-}
 
 public class Car {
 
     private String name;
     private String engine;
-    private Integer power,torgue;
-    private Integer year;
-    private Float price;
+    private int power, torgue;
+    private int year;
+    private float price;
     private CarColor carColor;
     private CarFirm carFirm;
 
@@ -25,55 +19,28 @@ public class Car {
         this.engine = engine;
     }
 
-    public void setPower(String power) throws IllegalArgumentException {
-        try {
-            this.power = Integer.parseInt(power);
-        }
-        catch (IllegalArgumentException e) {
-            throw e;
-        }
-    }
-    public void setTorgue(String torgue) throws IllegalArgumentException {
-        try {
-            this.torgue = Integer.parseInt(torgue);
-        }
-        catch (IllegalArgumentException e) {
-            throw e;
-        }
-    }
-    public void setYear(String year) throws IllegalArgumentException {
-        try {
-            this.year = Integer.parseInt(year);
-        }
-        catch (IllegalArgumentException e) {
-            throw e;
-        }
-    }
-    public void setPrice(String price) throws IllegalArgumentException {
-        try {
-            this.price = Float.parseFloat(price);
-        }
-        catch (IllegalArgumentException e) {
-            throw e;
-        }
+    public void setPower(int power) {
+        this.power = power;
     }
 
-    public void setCarColor(String carColor)  {
-        try {
-            this.carColor=CarColor.valueOf(carColor);
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
-
+    public void setTorgue(int torgue) {
+        this.torgue = torgue;
     }
 
-    public void setCarFirm(String carFirm) {
-        try {
-            this.carFirm=CarFirm.valueOf(carFirm);
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-        } catch (IllegalArgumentException e) {
-            throw e;
-        }
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public void setCarColor(CarColor color) {
+        this.carColor = color;
+    }
+
+    public void setCarFirm(CarFirm firm) {
+        this.carFirm = firm;
     }
 
     public String getName() {
@@ -107,4 +74,32 @@ public class Car {
     public CarFirm getCarFirm() {
         return carFirm;
     }
+
+    public enum CarColor {
+        RED, BLACK, WHITE, BLUE, GREEN, UNDEFINED
+    }
+
+    public enum CarFirm {
+        AUDI, BMW, Mercedes, VW, UNDEFINED
+    }
+
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj == null) return false;
+        if (!(getClass() == obj.getClass())) return false;
+        else {
+            Car tmp = (Car) obj;
+            if (this.name.equals(tmp.getName()) &&
+                    this.carFirm.equals(tmp.getCarFirm()) &&
+                    this.carColor.equals(tmp.getCarColor()) &&
+                    this.year == tmp.getYear() &&
+                    this.power == tmp.getPower() &&
+                    this.torgue == tmp.getTorgue() &&
+                    this.engine.equals(tmp.getEngine()) &&
+                    this.price == tmp.getPrice()
+                    ) return true;
+            else return false;
+        }
+    }
+
 }

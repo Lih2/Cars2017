@@ -22,7 +22,7 @@ public class Solution {
         ArrayList<Car> cars=new ArrayList<>();
 
         try {
-            converterReader= new CarConverterReaderCSV(fileNameIn, ',');
+            converterReader= new CarConverterReaderCSV(fileNameIn);
             cars=converterReader.readFile();
         }
         catch(IOException e) {
