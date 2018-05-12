@@ -18,14 +18,14 @@ import java.util.ArrayList;
 
 public class TestCarConverterWriterJSON {
 
-    public File file;
-    public String[] data=new String[10];
-    public ArrayList<Car> cars=new ArrayList<>();
+    private File file;
+    private String[] data=new String[10];
+    private ArrayList<Car> cars=new ArrayList<>();
 
     @Rule
     public TemporaryFolder folder= new TemporaryFolder();
 
-    public void initData() {
+    private void initData() {
         data[0]="AUDI,Audi A8,3.0TDI,240,350,2013,RED,700000";
         data[1]="BMW,BMW X5,3.0TDI,240,350,2013,BLACK,700000";
         data[2]="BMW,BMW X5,3.0TDI,240,350,2013,BLACK,700000";
@@ -37,7 +37,7 @@ public class TestCarConverterWriterJSON {
         data[8]="BMW,BMW X5,3.0TDI,240,350,2013,BLACK,700000";
         data[9]="Mercedes,Mercedes GLK,3.0TDI,240,350,2013,BLACK,700000";
     }
-    public void initCars() {
+    private void initCars() {
         CarParser carParser = new CarParser(',');
         for(int i=0;i<data.length;i++) {
             cars.add(carParser.parseStringToCar(data[i]));

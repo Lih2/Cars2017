@@ -6,7 +6,7 @@ import ru.ocrimea.Car;
 
 public class TestCar {
 
-    public Car originCar, destCar;
+    private Car originCar, destCar;
 
     @Before
     public void initCars() {

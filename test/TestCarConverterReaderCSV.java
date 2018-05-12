@@ -19,15 +19,15 @@ import java.util.ArrayList;
 
 public class TestCarConverterReaderCSV {
 
-    public File file;
-    public String[] data=new String[6];
-    public Car[] cars=new Car[6];
+    private File file;
+    private String[] data=new String[6];
+    private Car[] cars=new Car[6];
 
     @Rule
     public TemporaryFolder folder= new TemporaryFolder();
 
 
-    public void initData() {
+    private void initData() {
 
         data[0]="AUDI,Audi A8,3.0TDI,240,350,2013,RED,700000";
         data[1]="BMW,BMW X5,3.0TDI,240,350,2013,BLACK,700000";
@@ -37,7 +37,7 @@ public class TestCarConverterReaderCSV {
         data[5]="Mercedes,Mercedes GLK,3.0TDI,240,350,2013,BLACK,700000";
     }
 
-    public void initDataWrong() {
+    private void initDataWrong() {
 
         data[0]="AUDI,Audi A8,3.0TDI,240,350,2013,RED";
         data[1]="BMW,BMW X5,3.0TDI,240,350,2013,BLACK,700000";
@@ -47,7 +47,7 @@ public class TestCarConverterReaderCSV {
         data[5]="Mercedes,Mercedes GLK,3.0TDI,240,350,2013,BLACK,700000";
     }
 
-    public void initCars() {
+    private void initCars() {
 
         CarParser carParser = new CarParser(',');
         for(int i=0;i<data.length;i++) {
@@ -56,7 +56,7 @@ public class TestCarConverterReaderCSV {
     }
 
 
-    public void createTmpFile() throws IOException {
+    private void createTmpFile() throws IOException {
 
         FileWriter writer=null;
 
@@ -85,17 +85,16 @@ public class TestCarConverterReaderCSV {
     @Test
     public void testCarConverterReaderCSVNum() throws IOException {
 
-        ArrayList<Car> cars2= new ArrayList<>();
         initData();
         initCars();
 
         try {
             createTmpFile();
             CarConverterReaderCSV csv=new CarConverterReaderCSV(file.getAbsolutePath());
-            cars2=csv.readFile();
-            Assert.assertEquals("Number of Cars", cars2.size(),data.length);
-            for(int i=0;i<cars2.size();i++) {
-                Assert.assertEquals("Car"+i,cars2.get(i),cars[i]);
+            ArrayList<Car> carsFromFile=csv.readFile();
+            Assert.assertEquals("Number of Cars", carsFromFile.size(),data.length);
+            for(int i=0;i<carsFromFile.size();i++) {
+                Assert.assertEquals("Car"+i,carsFromFile.get(i),cars[i]);
             }
         }
         catch(IOException e) {
